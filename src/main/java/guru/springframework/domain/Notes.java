@@ -1,7 +1,6 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
-
 @Entity
 public class Notes {
 
@@ -11,6 +10,8 @@ public class Notes {
 
     @OneToOne
     private Recipe recipe;
+
+    @Lob
     private String recipeNotes;
 
     public Long getId() {
