@@ -6,6 +6,7 @@ import guru.springframework.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,5 +28,18 @@ public class RecipeServiceImpl implements RecipeService {
 
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
+    }
+
+    @Override
+    public Recipe findById(Long id) {
+        log.debug("I am in the find by Id method");
+
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+
+        if (optionalRecipe.isPresent()) {
+            return optionalRecipe.get();
+        }
+
+        throw new RuntimeException("Recipe not found!!!");
     }
 }
